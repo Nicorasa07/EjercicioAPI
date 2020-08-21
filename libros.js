@@ -1,15 +1,7 @@
-const express = require("express");
-const app1 = require("./app");
-const app = express();
+const app = require("./app");
+const autores = require('./arrayautores');
 
-const libros = [];
-const autores = [];
-
-app.listen(3000, () => {
-  console.log("servidor arriba en http://localhost:3000");
-});
-
-server.get("/autores/:id/libros", (req, res) => {
+app.get("/autores/:id/libros", (req, res) => {
   const id = req.params.id;
 
   if (isNaN(id)) {
@@ -20,7 +12,7 @@ server.get("/autores/:id/libros", (req, res) => {
   }
 });
 
-server.post("/autores/:id/libros", (req, res) => {
+app.post("/autores/:id/libros", (req, res) => {
   const { body } = req;
   const id = req.params.id;
 
@@ -35,7 +27,7 @@ server.post("/autores/:id/libros", (req, res) => {
   }
 });
 
-server.get("/autores/:id/libros/:idLibro", (req, res) => {
+app.get("/autores/:id/libros/:idLibro", (req, res) => {
   const id = req.params.id;
   const idLibro = req.params.idLibro;
 
@@ -49,13 +41,14 @@ server.get("/autores/:id/libros/:idLibro", (req, res) => {
     const libros = autor.libros;
     const libro = libros.find((libro) => libro.id == idLibro);
 
-    res.status(200).json(autor.libro);
+    res.status(200).json(libro);
   }
 });
 
-server.put("/autores/:id/libros/:idLibro", (req, res) => {
+app.put("/autores/:id/libros/:idLibro", (req, res) => {
   const id = req.params.id;
   const idLibro = req.params.idLibro;
+  const {body} = req;
 
   if (isNaN(id) || isNaN(idLibro)) {
     res.status(400).json({ error: "Solicitud no válida" });
@@ -66,7 +59,7 @@ server.put("/autores/:id/libros/:idLibro", (req, res) => {
 
     if (libro) {
       const i = libros.indexOf(libro);
-      libros[i] = libro;
+      libros[i] = body;
       res.send("Autor Actualizado");
     } else {
       res.status(404).send("Id no encontrado");
@@ -74,7 +67,7 @@ server.put("/autores/:id/libros/:idLibro", (req, res) => {
   }
 });
 
-server.delete("/autores/:id/libros/:idLibro", (req, res) => {
+app.delete("/autores/:id/libros/:idLibro", (req, res) => {
   const id = req.params.id;
   const idLibro = req.params.idLibro;
 
