@@ -1,78 +1,63 @@
-/*NERUDA*/
+<<<<<<< HEAD
 
-libros: [
-{
-    id:1,
-    titulo: "Veinte poemas de amor y una canción desesperada",
-    genero: "poesia",
-    anio publicacion: 1924
-},
+=======
+const express = require("express");
+const app1 = require("./app");
+const app = express();
 
-{
-    id:2,
-    titulo:"Libro de las preguntas"
-    genero: "poesia"
-    anio publicacion: 1974
-},{
-    id:3,
-    titulo:"La Barcarola",
-    genero: "poesia",
-    anio publicacion: 1967
-},
-{
-    id:4,
-    titulo:"Cien sonetos de amor",
-    genero: "poesia",
-    anio publicacion: 1959
-},
-]
-/*MARQUEZ*/
-libros: [
-    {
-        id:5,
-        titulo: "Cien anios de soledad",
-        genero: "Drama y realismo mágico",
-        anio publicacion: 1967
-    },
-    
-    {
-        id:6,
-        titulo:"Libro de las preguntas",
-        genero: "poesia",
-        anio publicacion: 1974
-    },{
-        id:7,
-        titulo:"El amor en los tiempos del colera",
-        genero: "Novela romantica",
-        anio publicacion: 1985
-    },
-    {
-        id:8,
-        titulo:"Cronicas de una muerte anunciada",
-        genero: "Novela romantica",
-        anio publicacion: 1981
-    },
-    ]
-    /*BORGES*/
+const libros = [];
+const autores = [];
 
-    libros: [
-        {
-            id:9,
-            titulo: "El informe de Brodie",
-            genero: "Cuento",
-            anio publicacion: 1970
-        },
-        
-        {
-            id:10,
-            titulo:"Historia universal de la infamia",
-            genero: "Cuento",
-            anio publicacion: 1936
-        },{
-            id:11,
-            titulo:"La moneda de hierro",
-            genero: "Poesia",
-            anio publicacion: 1976
-        },
-        
-        ]
+app.listen(3000, () => {
+  console.log("servidor arriba en http://localhost:3000");
+});
+
+server.get("/autores/:id/libros", (req, res) => {
+  const id = req.params.id;
+
+  const autor = autores.find((autor) => autor.id == id);
+  res.json(autor.libros);
+});
+
+server.post("/autores/:id/libros", (req, res) => {
+  const { body } = req;
+  const id = req.params.id;
+
+  const autor = autores.find((autor) => autor.id == id);
+  const libros = autor.libros;
+  libros.push(body);
+
+  res.status(200).json("Agregado");
+});
+
+server.get("/autores/:id/libros/:idLibro", (req, res) => {
+  const id = req.params.id;
+  const idLibro = req.params.idLibro;
+
+  const autor = autores.find((autor) => autor.id == id);
+  const libros = autor.libros;
+  const libro = libros.find((libro) => libro.id == idLibro);
+
+  res.json(autor.libro);
+});
+
+server.put("/autores/:id/libros/:idLibro", (req, res) => {
+  const id = req.params.id;
+  const idLibro = req.params.idLibro;
+});
+
+server.delete("/autores/:id/libros/:idLibro", (req, res) => {
+  const id = req.params.id;
+  const idLibro = req.params.idLibro;
+
+  const autor = autores.find((autor) => autor.id == id);
+  const libros = autor.libros;
+  const libro = libros.find((libro) => libro.id == idLibro);
+
+  const index = libros.indexOf(libro);
+  if (index > -1) {
+    libros.splice(index, 1);
+  }
+  res.status(204).json("Borrado");
+});
+>>>>>>> 12b71ac3271cc24f36a5dde6e0a5bcceb4e744d7
