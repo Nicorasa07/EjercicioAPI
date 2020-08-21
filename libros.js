@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-
-=======
 const express = require("express");
 const app1 = require("./app");
 const app = express();
@@ -91,4 +88,3 @@ server.delete("/autores/:id/libros/:idLibro", (req, res) => {
   }
   res.status(204).json("Borrado");
 });
->>>>>>> 12b71ac3271cc24f36a5dde6e0a5bcceb4e744d7
